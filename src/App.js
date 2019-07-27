@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+class App extends React.Component {
+  render () {
+    return (
+      <div className='container'>
+        <h1 className='jumbotron-heading text-center'>{this.props.value}</h1>
+        <p className='text-center'>
+          <button onClick={this.props.onIncrement} className='btn btn-primary mr-2'>Increase</button>
+          <button onClick={this.props.onDecrement} className='btn btn-danger mr-2'>Decrease</button>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      </div>
+    )
+  }
+}
+
+App.propTypes = {
+  value: PropTypes.number.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired
 }
 
 export default App;
