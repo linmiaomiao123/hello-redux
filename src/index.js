@@ -4,11 +4,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
-import reducer from './reducers/counter';
+import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 
 /** 创建store */
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 /** 监听state , 打印获取到的state */
 // store.subscribe(() => console.log('State update', store.getState()))
@@ -20,7 +20,7 @@ const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App store={store} />
+    <App />
   </Provider>,
   document.getElementById('root'));
 
