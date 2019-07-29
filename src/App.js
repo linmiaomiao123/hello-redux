@@ -5,10 +5,10 @@ class App extends React.Component {
   render () {
     return (
       <div className='container'>
-        <h1 className='jumbotron-heading text-center'>{this.props.value}</h1>
+        <h1 className='jumbotron-heading text-center'>{this.props.store.getState()}</h1>
         <p className='text-center'>
-          <button onClick={this.props.onIncrement} className='btn btn-primary mr-2'>Increase</button>
-          <button onClick={this.props.onDecrement} className='btn btn-danger mr-2'>Decrease</button>
+          <button className='btn btn-primary mr-2'>Increase</button>
+          <button className='btn btn-danger mr-2'>Decrease</button>
         </p>
       </div>
     )
