@@ -3,12 +3,28 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+
+// const logger = store => next => action => {
+//   console.log('dispatching', action)
+//   let result = next(action)
+//   console.log('next state', store.getState())
+//   return result
+// }
+
+// const error = store => next => action => {
+//   try {
+//     next(action)
+//   } catch(e) {
+//     console.log('error', + e)
+//   }
+// }
 
 /** 创建store */
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, {}, applyMiddleware(logger));
 
 /** 监听state , 打印获取到的state */
 // store.subscribe(() => console.log('State update', store.getState()))
