@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { increment } from './actions';
-import { bindActionCreators } from 'redux';
+import { increment, decrement } from './actions';
+// import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
   render () {
-    const { increment } = this.props
+    const { increment, decrement } = this.props
     return (
       <div className='container'>
         <h1 className='jumbotron-heading text-center'>{this.props.counter}</h1>
         <p className='text-center'>
-          <button onClick={() => increment({id: 1, name: 'lin'})} className='btn btn-primary mr-2'>Increase</button>
-          <button className='btn btn-danger mr-2'>Decrease</button>
+          <button onClick={() => increment()} className='btn btn-primary mr-2'>Increase</button>
+          <button onClick={() => decrement()} className='btn btn-danger mr-2'>Decrease</button>
         </p>
       </div>
     )
@@ -41,13 +41,18 @@ const mapStateToProps = (state) => {
 // }
 
 /** 方法四 */
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ increment}, dispatch)
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({ increment}, dispatch)
+// }
 
 App.propTypes = {
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
 }
 
 /** 方法2/3/4 */
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+/** 方法五， 最常用的 */
+export default connect(mapStateToProps, { increment, decrement })(App);
