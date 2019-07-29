@@ -5,12 +5,12 @@ import { increment } from './actions';
 
 class App extends React.Component {
   render () {
-    const { dispatch } = this.props
+    const { a } = this.props
     return (
       <div className='container'>
         <h1 className='jumbotron-heading text-center'>{this.props.counter}</h1>
         <p className='text-center'>
-          <button onClick={() => dispatch(increment({id: 1, name: 'lin'}))} className='btn btn-primary mr-2'>Increase</button>
+          <button onClick={() => a({id: 1, name: 'lin'})} className='btn btn-primary mr-2'>Increase</button>
           <button className='btn btn-danger mr-2'>Decrease</button>
         </p>
       </div>
@@ -25,8 +25,14 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    a: (name) => dispatch(increment(name))
+  }
+}
+
 App.propTypes = {
   counter: PropTypes.number.isRequired
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
