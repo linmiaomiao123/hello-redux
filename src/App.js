@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { increment, decrement } from './actions';
-// import { bindActionCreators } from 'redux';
+// import { increment, decrement } from './actions';
+import * as types from './actions';
+
+import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
   render () {
@@ -55,4 +57,10 @@ App.propTypes = {
 // export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 /** 方法五， 最常用的 */
-export default connect(mapStateToProps, { increment, decrement })(App);
+// export default connect(mapStateToProps, { increment, decrement })(App);
+
+/** 当有多条actions得时候 */
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(types, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
