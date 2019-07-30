@@ -9,7 +9,8 @@ import { Provider } from 'react-redux';
 
 import logger from 'redux-logger'; // 如果需要在每一个action中，都需要打印日志，需要用到中间件 redux-logger
 import thunk from 'redux-thunk'; //action dispatch一个函数的时候 需要用到redux-thunk
-import promise from 'redux-promise-middleware'; //
+import promise from 'redux-promise-middleware'; //异步处理promise中间件 
+import { composeWithDevTools } from 'redux-devtools-extension'; //调试工具
 
 // const logger = store => next => action => {
 //   console.log('dispatching', action)
@@ -27,7 +28,7 @@ import promise from 'redux-promise-middleware'; //
 // }
 
 /** 创建store */
-const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk, promise));
+const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(logger, thunk, promise)));
 
 /** 监听state , 打印获取到的state */
 // store.subscribe(() => console.log('State update', store.getState()))
@@ -41,7 +42,20 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root'));
+  document.getElementById('root')
+);
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+  })
+}
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
