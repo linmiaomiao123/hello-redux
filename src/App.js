@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 // import { increment, decrement } from './actions';
 import * as types from './actions';
 
+import User from './components/User'
+
 import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
@@ -16,6 +18,7 @@ class App extends React.Component {
           <button onClick={() => increment()} className='btn btn-primary mr-2'>Increase</button>
           <button onClick={() => decrement()} className='btn btn-danger mr-2'>Decrease</button>
         </p>
+        <User />
       </div>
     )
   }

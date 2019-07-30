@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 // const logger = store => next => action => {
 //   console.log('dispatching', action)
@@ -24,7 +25,7 @@ import logger from 'redux-logger';
 // }
 
 /** 创建store */
-const store = createStore(rootReducer, {}, applyMiddleware(logger));
+const store = createStore(rootReducer, {}, applyMiddleware(logger, thunk));
 
 /** 监听state , 打印获取到的state */
 // store.subscribe(() => console.log('State update', store.getState()))
